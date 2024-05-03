@@ -1,3 +1,4 @@
+// MultiSelectDropdown.js
 
 import React, { useState, useEffect } from "react";
 import Select from "react-select";
@@ -100,8 +101,6 @@ const MultiSelectDropdown = () => {
 
 
 
-
-
     useEffect(() => {
         const filteredJobs = jobs.filter((job) => {
             let passesFilter = true;
@@ -111,6 +110,8 @@ const MultiSelectDropdown = () => {
             }
             if (selectedEmployee.length > 0) {
                 const employeeRanges = selectedEmployee.map((option) => option.value)
+                // Logic to check if job falls into any selected employee range
+                // For example, you might have a field in job data like 'employeeCount' to compare with
                 passesFilter = passesFilter && employeeRanges.includes(job.employeeCount)
             }
             if (selectedExp.length > 0) {
