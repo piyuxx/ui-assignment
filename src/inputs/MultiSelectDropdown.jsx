@@ -99,6 +99,42 @@ const MultiSelectDropdown = () => {
     }, []);
 
 
+
+
+
+    useEffect(() => {
+        const filteredJobs = jobs.filter((job) => {
+            let passesFilter = true;
+            if (selectedValues.length > 0) {
+                const categories = selectedValues.map((option) => option.value)
+                passesFilter = passesFilter && categories.includes(job.jobRole)
+            }
+            if (selectedEmployee.length > 0) {
+                const employeeRanges = selectedEmployee.map((option) => option.value)
+                passesFilter = passesFilter && employeeRanges.includes(job.employeeCount)
+            }
+            if (selectedExp.length > 0) {
+                const maxExp = Math.max(...selectedExp.map((option) => parseInt(option.value)))
+                passesFilter = passesFilter && parseInt(job.minExp) <= maxExp
+            }
+            if (selectBasePay.length > 0) {
+                const maxExp = Math.max(...selectBasePay.map((option) => parseInt(option.value)))
+                passesFilter = passesFilter && parseInt(job.minJdSalary) <= maxExp
+            }
+            if (JobPreference.length > 0) {
+                const categories = JobPreference.map((option) => option.value)
+                passesFilter = passesFilter && categories.includes(job.location)
+            }
+            // if (companyName !== "") {
+            //     passesFilter = passesFilter && job.companyName.toLowerCase().includes(companyName.toLowerCase());
+            // }
+            return passesFilter;
+        });
+        setFilteredJobs(filteredJobs);
+        console.log(filteredJobs);
+    }, [selectedValues, selectedEmployee, selectedExp, selectBasePay, JobPreference, companyName, jobs]);
+
+
     return (<>
         <div style={{ display: "flex", gap: "10px", padding: "20px", flexWrap: "wrap", width: "90%" }} >
 
