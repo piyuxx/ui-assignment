@@ -1,4 +1,3 @@
-// MultiSelectDropdown.js
 
 import React, { useState, useEffect } from "react";
 import Select from "react-select";
@@ -23,7 +22,6 @@ const options = [
             { value: "bookkeeper", label: "Bookkeeper" },
         ],
     },
-    // Add more categories and options as needed
 ];
 
 const Employees = [
@@ -88,9 +86,9 @@ const MultiSelectDropdown = () => {
         const fetchData = async () => {
             setLoading(true);
             try {
-                const data = await fetchJobs(page);
-                setJobs((prevJobs) => [...prevJobs, ...data.jdList]);
-                setFilteredJobs((prevJobs) => [...prevJobs, ...data.jdList]);
+                const data = await fetchJobs();
+                setJobs(data);
+                setFilteredJobs(data);
             } catch (error) {
                 console.log(error);
             }
@@ -98,61 +96,7 @@ const MultiSelectDropdown = () => {
         };
 
         fetchData();
-    }, [page]);
-
-    useEffect(() => {
-        const handleScroll = () => {
-            if (
-                window.innerHeight + document.documentElement.scrollTop >=
-                document.documentElement.offsetHeight - 50 // Adjust this value as needed
-            ) {
-                if (!loading) {
-                    setPage((prevPage) => prevPage + 1);
-                }
-            }
-        };
-
-        window.addEventListener("scroll", handleScroll);
-        return () => {
-            window.removeEventListener("scroll", handleScroll);
-        };
     }, []);
-
-
-
-    useEffect(() => {
-        const filteredJobs = jobs.filter((job) => {
-            let passesFilter = true;
-            if (selectedValues.length > 0) {
-                const categories = selectedValues.map((option) => option.value)
-                passesFilter = passesFilter && categories.includes(job.jobRole)
-            }
-            if (selectedEmployee.length > 0) {
-                const employeeRanges = selectedEmployee.map((option) => option.value)
-                // Logic to check if job falls into any selected employee range
-                // For example, you might have a field in job data like 'employeeCount' to compare with
-                passesFilter = passesFilter && employeeRanges.includes(job.employeeCount)
-            }
-            if (selectedExp.length > 0) {
-                const maxExp = Math.max(...selectedExp.map((option) => parseInt(option.value)))
-                passesFilter = passesFilter && parseInt(job.minExp) <= maxExp
-            }
-            if (selectBasePay.length > 0) {
-                const maxExp = Math.max(...selectBasePay.map((option) => parseInt(option.value)))
-                passesFilter = passesFilter && parseInt(job.minJdSalary) <= maxExp
-            }
-            if (JobPreference.length > 0) {
-                const categories = JobPreference.map((option) => option.value)
-                passesFilter = passesFilter && categories.includes(job.location)
-            }
-            // if (companyName !== "") {
-            //     passesFilter = passesFilter && job.companyName.toLowerCase().includes(companyName.toLowerCase());
-            // }
-            return passesFilter;
-        });
-        setFilteredJobs(filteredJobs);
-        console.log(filteredJobs);
-    }, [selectedValues, selectedEmployee, selectedExp, selectBasePay, JobPreference, companyName, jobs]);
 
 
     return (<>
