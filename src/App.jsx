@@ -1,9 +1,10 @@
+import AutoComplete from "./inputs/AutoComplte"
 
 function App() {
 
   return (
     <>
-      <AutoComplte />
+      <AutoComplete />
     </>
   )
 }

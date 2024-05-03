@@ -87,9 +87,9 @@ const MultiSelectDropdown = () => {
         const fetchData = async () => {
             setLoading(true);
             try {
-                const data = await fetchJobs();
-                setJobs(data);
-                setFilteredJobs(data);
+                const data = await fetchJobs(page);
+                setJobs((prevJobs) => [...prevJobs, ...data.jdList]);
+                setFilteredJobs((prevJobs) => [...prevJobs, ...data.jdList]);
             } catch (error) {
                 console.log(error);
             }
@@ -97,6 +97,24 @@ const MultiSelectDropdown = () => {
         };
 
         fetchData();
+    }, [page]);
+
+    useEffect(() => {
+        const handleScroll = () => {
+            if (
+                window.innerHeight + document.documentElement.scrollTop >=
+                document.documentElement.offsetHeight - 50 // Adjust this value as needed
+            ) {
+                if (!loading) {
+                    setPage((prevPage) => prevPage + 1);
+                }
+            }
+        };
+
+        window.addEventListener("scroll", handleScroll);
+        return () => {
+            window.removeEventListener("scroll", handleScroll);
+        };
     }, []);
 
 

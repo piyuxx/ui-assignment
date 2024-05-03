@@ -1,6 +1,6 @@
 // jobAPI.js
 
-const fetchJobs = async () => {
+const fetchJobs = async (api) => {
     const myHeaders = new Headers();
     myHeaders.append("Content-Type", "application/json");
     let limit = 50;
