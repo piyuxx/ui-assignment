@@ -8,7 +8,7 @@ const JobListings = ({ jobListings }) => {
                 <Grid key={index} item xs={12} sm={6} md={4} sx={{
                     display:
                         'flex', justifyContent: 'center',
-                    marginBottom: '20px', width: "300px", height: "550px"
+                    width: "300px", height: "680px"
                 }}>
                     <JobListing data={job} />
                 </Grid>

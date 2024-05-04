@@ -1,10 +1,10 @@
-import AutoComplete from "./inputs/AutoComplte"
+import MultiSelectDropdown from "./inputs/MultiSelectDropdown"
 
 function App() {
 
   return (
     <>
-      <AutoComplete />
+      <MultiSelectDropdown />
     </>
   )
 }
