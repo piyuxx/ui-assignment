@@ -39,14 +39,7 @@ const JobListing = ({ data }) => {
                     About Us
                 </Typography>
                 <Typography variant="body2" gutterBottom sx={{ position: 'relative', maxHeight: '200px', maxWidth: '400px', overflowY: 'auto', display: 'flex', flexDirection: 'column' }}>
-                    {/* {isVisible ? data.jobDetailsFromCompany : (
-                        <>
-                            <span >{data.jobDetailsFromCompany.slice(0, 115)}
-                                <span style={{ opacity: 0.2, backgroundColor: "white", backdropFilter: blur(8) }}>{data.jobDetailsFromCompany.slice(115, 278)}</span>
-                            </span>
 
-                        </>
-                    )} */}
                     <div >
                         <span style={{ margin: 0 }}>{data.jobDetailsFromCompany.slice(0, 100)}</span>
 
@@ -61,7 +54,6 @@ const JobListing = ({ data }) => {
                         fontSize: "12px",
                         fontWeight: 200,
                         zIndex: '1',
-                        // Adjust position to center horizontally and vertically
                         top: '50%',
                         left: '45%',
                         transform: 'translate(-40%, -1%)'
@@ -83,7 +75,7 @@ const JobListing = ({ data }) => {
                 variant="contained"
                 size="small"
                 sx={{ width: "90%", fontWeight: "bold", height: "40px", margin: "20px", marginTop: "0px", marginBottom: "3px", backgroundColor: '#7ff4d3', color: 'black', '&:hover': { backgroundColor: '#4842DA' } }}
-                className="apply-button"
+
 
             >
                 <BoltIcon style={{ marginRight: '0.5rem', color: '#FF822D', }} />
@@ -93,8 +85,6 @@ const JobListing = ({ data }) => {
                 href={data.jdLink || '#'}
                 variant="contained"
                 size="small"
-                className="referral-button"
-
                 sx={{
                     width: "90%",
                     height: "40px",
@@ -102,19 +92,18 @@ const JobListing = ({ data }) => {
                     color: '#FFFF',
                     marginTop: "4px",
                     backgroundColor: '#4842DA', // Rounded corners
-
                     '&:hover': {
                         backgroundColor: '#55EFC4',
                         marginBottom: '30px'
 
                     }
                 }}
+
             >
-                {/* Use the second blurry icon */}
                 <img src={exampleImage} alt="Blurry Icon 1" style={{ height: '2rem', borderRadius: "50%", filter: "blur(2px)", marginRight: "4px" }} />
 
                 <img src={exampleImage2} alt="Blurry Icon 2" style={{ marginRight: '0.5rem', height: '2rem', borderRadius: "50%", filter: "blur(2px)" }} />
-                <span style={{ fontSize: "auto" }}>Unlock Referral Asks</span>
+                <span className="unlock-text">Unlock Referral Asks</span>
             </Button>
 
         </Card >

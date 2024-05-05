@@ -1,12 +1,12 @@
 // jobAPI.js
 
-const fetchJobs = async (api) => {
+const fetchJobs = async (page) => {
     const myHeaders = new Headers();
     myHeaders.append("Content-Type", "application/json");
-    let limit = 50;
+    let limit = 100;
     const body = JSON.stringify({
         limit,
-        offset: 0,
+        offset: page * limit,
     });
 
     const requestOptions = {
@@ -21,7 +21,10 @@ const fetchJobs = async (api) => {
             requestOptions
         );
         const data = await response.json();
-        return data;
+        return {
+            data,
+            status: 200
+        };
     } catch (error) {
         console.error("Error fetching jobs:", error);
         throw error;
